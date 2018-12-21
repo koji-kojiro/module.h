@@ -18,7 +18,7 @@ A module should consist of a pair of a header file and .c source file. Here is a
 module (greet)
 {
   /* function should be declared as a function pointer. */
-  void (*greet) (const char *); 
+  void (*hello) (const char *); 
 };
 
 ```
@@ -31,7 +31,7 @@ module (greet)
 
 /* module members should be static. */
 static void
-greet (const char *name)
+hello (const char *name)
 {
   printf ("Hello, %s\n", name);
 }
@@ -42,7 +42,7 @@ greet (const char *name)
 constructor
 __init_greet (void)
 {
-  greet.greet = greet;
+  greet.hello = hello;
 }
 
 ```
@@ -55,7 +55,7 @@ You can use this `greet` module as follows.
 int
 main (int argc, char *argv[])
 {
-  greet.greet ("Kojiro");
+  greet.hello ("Kojiro");
   return 0;
 }
 ```
