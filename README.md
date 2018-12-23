@@ -74,6 +74,28 @@ struct module_foo { ... };
 So, the function `__init_foo` is hooked to main function and it initializes the struct `foo`.
 It can be said that each modules are singletons.
 
+You can also create sub-modules like this:
+
+```:.c
+module (foo)
+{
+  struct
+    {
+      void (*baz) (void); 
+    } bar;
+}
+```
+
+The constructor should be:
+
+```:.c
+constructor
+__init_foo (void)
+{
+  foo.bar.baz = baz;
+}
+```
+
 ## Limitations
 All the functions or the variables belonging to a module are actualy members of a struct named same as the module.
 So, macros and types could not be contained in a module.
@@ -86,6 +108,12 @@ module (foo)
   typedef qux quux;  /* error */
 };
 ```
+
+## Benefits
+`module.h` allows you to avoid a kind of name-conflicting problems.
+C basically doesn't have namespaces, so, sometimes some kinf of prefix or suffix rules are taken,
+for example, `fprintf` for files and `printf` for stdout.  
+`module.h` can avoid this old manner. Please refer examples/io.
 
 ## License
 moule.h is distributed under [MIT License](LICENSE).
