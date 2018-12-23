@@ -1,4 +1,4 @@
-#include "io.h"
+#include "src/io.h"
 
 int
 main (int argc, char *argv[])
