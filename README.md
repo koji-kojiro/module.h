@@ -1,6 +1,7 @@
 # module.h
 ## Overview
-**module.h** is a header-obly library contains an implementation of simple module system for C programming language.
+**module.h** is a header-only library contains an implementation of simple module system for C programming language.
+This is quite experimental library. So, use at your own risks.
 
 ## Usage
 ### Creating a module
@@ -70,5 +71,24 @@ struct module_foo { ... };
 ```
 
 `constructor` is expanded to `__attribute__((constructor)) void`.
-So, the function `__init_foo` is hooked to main function and it initializes the struct foo.
+So, the function `__init_foo` is hooked to main function and it initializes the struct `foo`.
+It can be said that each modules are singletons.
 
+## Limitations
+All the functions or the variables belonging to a module are actualy members of a struct named same as the module.
+So, macros and types could not be contained in a module.
+
+```:.c
+module (foo)
+{
+  int (*bar) (void); /* works */
+  double baz;        /* works */
+  typedef qux quux;  /* error */
+};
+```
+
+## License
+moule.h is distributed under [MIT License](LICENSE).
+
+## Author
+[TANI Kojiro](https://github.com/koji-kojiro) (kojiro0531@gmail.com)
