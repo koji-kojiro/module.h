@@ -8,22 +8,24 @@ module (io)
 {
   struct
     {
-      const char *read;
-      const char *write;
-      const char *append;
-      const char *append_extend;
-      const char *read_extend;
-      const char *write_extend;
-      const char *binary_read;
-      const char *binary_write;
-      const char *binary_append;
-      const char *binary_read_extend;
-      const char *binary_write_extend;
-      const char *binary_append_extend;
-    } mode;
-  int (*remove) (const char *);
-  file_t (*fopen) (const char *, const char *);
-  char *(*fgets) (char *, int, file_t);
-  int (*fclose) (file_t);
+      struct
+        {
+          const char *read;
+          const char *write;
+          const char *append;
+          const char *append_extend;
+          const char *read_extend;
+          const char *write_extend;
+          const char *binary_read;
+          const char *binary_write;
+          const char *binary_append;
+          const char *binary_read_extend;
+          const char *binary_write_extend;
+          const char *binary_append_extend;
+        } mode;
+      file_t (*open) (const char *, const char *);
+      char *(*gets) (char *, int, file_t);
+      int (*close) (file_t);
+    } file;
   int (*printf) (const char *, ...);   
 };

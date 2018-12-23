@@ -3,19 +3,19 @@
 #include "io.h"
 
 static file_t 
-_fopen (const char * filename, const char * mode)
+file_open (const char * filename, const char * mode)
 {
   return (file_t *) fopen (filename, mode);
 }
 
 static char *
-_fgets (char * s, int n, file_t stream)
+file_gets (char * s, int n, file_t stream)
 {
   return fgets (s, n, stream);
 }
 
 static int
-_fclose (file_t stream)
+file_close (file_t stream)
 {
   return fclose (stream);
 }
@@ -33,21 +33,21 @@ _printf (const char *format, ...)
 constructor
 __init_math (void)
 {
-  io.mode.read = "r";
-  io.mode.write = "w";
-  io.mode.append = "a";
-  io.mode.read_extend = "r+";
-  io.mode.write_extend = "w+";
-  io.mode.append_extend = "a+";
-  io.mode.binary_read = "rb"; 
-  io.mode.binary_write = "wb";
-  io.mode.binary_append = "ab";
-  io.mode.binary_read_extend = "r+b";
-  io.mode.binary_write_extend = "w+b";
-  io.mode.binary_append_extend = "a+b";
+  io.file.mode.read = "r";
+  io.file.mode.write = "w";
+  io.file.mode.append = "a";
+  io.file.mode.read_extend = "r+";
+  io.file.mode.write_extend = "w+";
+  io.file.mode.append_extend = "a+";
+  io.file.mode.binary_read = "rb"; 
+  io.file.mode.binary_write = "wb";
+  io.file.mode.binary_append = "ab";
+  io.file.mode.binary_read_extend = "r+b";
+  io.file.mode.binary_write_extend = "w+b";
+  io.file.mode.binary_append_extend = "a+b";
 
-  io.fopen = _fopen;
-  io.fgets = _fgets;
-  io.fclose = _fclose;
+  io.file.open = file_open;
+  io.file.gets = file_gets;
+  io.file.close = file_close;
   io.printf = _printf;
 }
